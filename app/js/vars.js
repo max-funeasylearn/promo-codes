@@ -1,0 +1,1 @@
+System.register([],function(e,t){"use strict";var r;t&&t.id;return{setters:[],execute:function(){r=function(){function e(){this.user={user_type:""},this.user.user_type=e.user_type}return e}(),e("Vars",r)}}});

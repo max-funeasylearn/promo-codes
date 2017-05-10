@@ -1,0 +1,127 @@
+<div class="bg-light lter b-b wrapper-md mb-10">
+  <div class="row">
+    <div class="col-sm-6 col-xs-12">
+      <h1 class="font-thin h3 m-0">
+        Promo Codes
+        <button type="button" class="btn btn-success" (click)="showForm($event.target)"><span class="glyphicon glyphicon-plus"></span></button>
+        <button type="button" class="btn btn-default" (click)="showGenerateForm($event.target)" [hidden]="user.user_type!='admin'"><span class="glyphicon glyphicon-download-alt"></span></button>
+      </h1>
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-success notification" [hidden]="message==''"><div class="container-fluid">{{message}}</div></div>
+<div class="alert alert-danger notification" [hidden]="error==''"><div class="container-fluid">{{error}}</div></div>
+
+<div class="form-inline" [hidden]="promo_codes.length==0">
+  <div class="form-group">
+    <button type="button" class="btn btn-raised btn-primary btn-sm" (click) = "bulkDelete()" [hidden]="user.user_type!='admin'">Delete</button>
+  </div>
+  <div class="form-group">
+    <button type="button" class="btn btn-raised btn-primary btn-sm" (click) = "bulkMarkAsNotValid()">Mark as not valid</button>
+  </div>
+</div>
+<table class="table table-striped table-responsive" id="promo_codes" (display)="onDisplay()">
+  <thead>
+    <tr>
+      <th><input type="checkbox" id="promo_code_all_checkbox" (click) = "checkAll()" /></th>
+      <th>
+        ID
+        <a href="javascript:void(0)" (click)="sortTable($event.target)" data-by="promo_code_id">
+          <small><span class="fa fa-sort"></span></small>
+        </a>
+        <br/>
+      </th>
+      <th>
+        <select (change) = "filterTable($event.target)" class="filter" data-by="username">
+          <option value="0">Username</option>
+          <option *ngFor="#user of users" value="{{user.username}}">{{user.username}}</option>
+        </select>
+        <a href="javascript:void(0)" (click)="sortTable($event.target)" data-by="username">
+          <small><span class="fa fa-sort"></span></small>
+        </a>
+      </th>
+      <th>
+        <select (change) = "filterTable($event.target)" class="filter" data-by="project_name">
+          <option value="0">Project name</option>
+          <option *ngFor="#project_name of project_names" value="{{project_name}}">{{project_name}}</option>
+        </select>
+        <a href="javascript:void(0)" (click)="sortTable($event.target)" data-by="project_name">
+          <small><span class="fa fa-sort"></span></small>
+        </a>
+      </th>
+      <th>
+        <select (change) = "filterTable($event.target)" class="filter" data-by="promo_code_type">
+          <option value="0">Promo Code Type</option>
+          <option *ngFor="#promo_code_type of promo_code_types" value="{{promo_code_type.title}}">{{promo_code_type.title}}</option>
+        </select>
+        <a href="javascript:void(0)" (click)="sortTable($event.target)" data-by="type">
+          <small><span class="fa fa-sort"></span></small>
+        </a>
+      </th>
+      <th>
+        Promo Code
+        <a href="javascript:void(0)" (click)="sortTable($event.target)" data-by="promo_code">
+          <small><span class="fa fa-sort"></span></small>
+        </a>
+      </th>
+      <th>
+        Value
+        <a href="javascript:void(0)" (click)="sortTable($event.target)" data-by="value">
+          <small><span class="fa fa-sort"></span></small>
+        </a>
+      </th>
+      <th>
+        Date created
+        <a href="javascript:void(0)" (click)="sortTable($event.target)" data-by="date_created">
+          <small><span class="fa fa-sort"></span></small>
+        </a>
+      </th>
+      <th>
+        Valid
+        <a href="javascript:void(0)" (click)="sortTable($event.target)" data-by="valid">
+          <small><span class="fa fa-sort"></span></small>
+        </a>
+      </th>
+      <th>
+        Used
+        <a href="javascript:void(0)" (click)="sortTable($event.target)" data-by="used">
+          <small><span class="fa fa-sort"></span></small>
+        </a>
+      </th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="#promo_code of promo_codes">
+      <td><input type="checkbox" value="{{promo_code.promo_code_id}}" class="promo_code_checkbox" /></td>
+      <td>{{promo_code.promo_code_id}}</td>
+      <td>{{promo_code.username}}</td>
+      <td>{{promo_code.project_name}}</td>
+      <td>{{promo_code.type}}</td>
+      <td>{{promo_code.promo_code}}</td>
+      <td>{{promo_code.value}}</td>
+      <td>{{promo_code.date_created | date:'dd/M/yyyy'}}</td>
+      <td>{{promo_code.valid}}</td>
+      <td>{{promo_code.used}}</td>
+      <td>
+        <a href="javascript:void(0)" (click)="showForm($event.target,promo_code)"><span class="glyphicon glyphicon-pencil"></span></a>&nbsp;
+        <a href="javascript:void(0)" (click)="delete([promo_code.promo_code_id])" [hidden]="user.user_type!='admin'"><span class="glyphicon glyphicon-remove"></span></a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="form-inline" [hidden]="promo_codes.length==0">
+  <div class="form-group">
+    <button type="button" class="btn btn-raised btn-primary btn-sm" (click) = "bulkDelete()" [hidden]="user.user_type!='admin'">Delete</button>
+  </div>
+  <div class="form-group">
+    <button type="button" class="btn btn-raised btn-primary btn-sm" (click) = "bulkMarkAsNotValid()">Mark as not valid</button>
+  </div>
+</div>
+<nav aria-label="Pagination" [hidden]="pagination.pages.length==0">
+  <ul class="pagination">
+    <li *ngFor="#page of pagination.pages"><a href="javascript:void(0)" (click)="getPage(page)">{{page}}</a></li>
+  </ul>
+</nav>
+<div class="alert alert-info notification" [hidden]="info==''"><div class="container-fluid">{{info}}</div></div>

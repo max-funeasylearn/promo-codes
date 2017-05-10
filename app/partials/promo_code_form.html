@@ -1,0 +1,41 @@
+<div class="bg-light lter b-b wrapper-md mb-10">
+  <div class="row">
+    <div class="col-sm-6 col-xs-12">
+      <h1 class="font-thin h3 m-0" id="promo_code_form_title">{{form_title}}</h1>
+    </div>
+  </div>
+</div>
+
+<p class="alert alert-success  notification" [hidden]="message==''">{{message}}</p>
+<p class="alert alert-danger  notification" [hidden]="error==''">{{error}}</p>
+<div class="row">
+  <div class="col-lg-3 col-md-4 col-sm-6 boxs">
+    <form  (ngSubmit)="save($event)" id="promo_code_form" (display)="onDisplay()" class="boxs-body">
+      <input type="hidden" id="promo_code_id" [(ngModel)]="promo_code.promo_code_id" />
+      <div class="form-group">
+        <label for="password">Choose Promo Type</label>
+        <select class="form-control" id="promo_code_type_id" [(ngModel)]="promo_code.promo_code_type_id" (change)="selectPromoCodeType($event.target)">
+          <option value="{{promo_code_type.promo_code_type_id}}" *ngFor="#promo_code_type of promo_code_types">{{promo_code_type.title}}</option>
+        </select>
+      </div>
+      <div class="form-group" [hidden]="promo_code.project_name==''">
+        <label for="project_name">Project Name</label>
+        <p>{{promo_code.project_name}}</p>
+      </div>
+      <div class="form-group" [hidden]="promo_code.comment==''">
+        <label for="project_name">Comment</label>
+        <p>{{promo_code.comment}}</p>
+      </div>
+      <div class="form-group">
+        <label for="value">Enter Value</label>
+        <input type="text" class="form-control" id="value" [(ngModel)]="promo_code.value" required>
+      </div>
+      <button type="submit" class="btn btn-raised btn-primary" id="save_promo_code_button">{{save_button}}</button>
+    </form>
+    <div class="form-group" [hidden]="promo_code.promo_code==''">
+      <label for="project_name">Here is your code:</label>
+      <input type="text" class="form-control" id="value" [(ngModel)]="promo_code.promo_code" id="generated_promo_code" readonly="readonly">
+      <button class="btn btn-raised" data-clipboard-target="#generated_promo_code" id="copy_promo_code">Copy</button>
+    </div>
+  </div>
+</div>

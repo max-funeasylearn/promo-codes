@@ -1,0 +1,44 @@
+<div class="bg-light lter b-b wrapper-md mb-10">
+  <div class="row">
+    <div class="col-sm-6 col-xs-12">
+      <h1 class="font-thin h3 m-0">{{form_title}}</h1>
+    </div>
+  </div>
+</div>
+
+<p class="alert alert-success notification" [hidden]="message==''">{{message}}</p>
+<p class="alert alert-danger notification" [hidden]="error==''">{{error}}</p>
+<div class="row">
+  <div class="col-lg-3 col-md-4 col-sm-6 boxs">
+    <form (ngSubmit)="save($event)" id="promo_code_generate_form" (display)="onDisplay()" class="boxs-body">
+      <div class="form-group">
+        <label for="password">Choose Promo Type</label>
+        <select class="form-control" id="promo_code_type_id" [(ngModel)]="promo_code_type_id" (change)="selectPromoCodeType($event.target)">
+          <option value="{{promo_code_type.promo_code_type_id}}" *ngFor="#promo_code_type of promo_code_types">{{promo_code_type.title}}</option>
+        </select>
+      </div>
+      <div class="form-group" [hidden]="project_name==''">
+        <label for="project_name">Project Name</label>
+        <p>{{project_name}}</p>
+      </div>
+      <div class="form-group" [hidden]="comment==''">
+        <label for="project_name">Comment</label>
+        <p>{{comment}}</p>
+      </div>
+      <div class="form-group">
+        <label for="value">Number of Codes</label>
+        <input type="text" class="form-control" id="number_of_codes" [(ngModel)]="number_of_codes" required>
+      </div>
+      <div class="form-group">
+        <label for="value">Enter Common Value</label>
+        <input type="text" class="form-control" id="value" [(ngModel)]="value" required>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-raised btn-primary">Create</button>
+      </div>
+      <div [hidden]="export_link == ''">
+        <a href="{{export_link}}">Download Codes</a>&nbsp;<a href="javascript:void(0)" (click)="removeExportFile()"><span class="glyphicon glyphicon-remove"></span></a>
+      </div>
+    </form>
+  </div>
+</div>

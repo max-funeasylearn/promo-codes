@@ -1,0 +1,1 @@
+System.register(["angular2/platform/browser","./login.component"],function(t,n){"use strict";var e,o;n&&n.id;return{setters:[function(t){e=t},function(t){o=t}],execute:function(){$.get("/users/user_info",function(t){void 0===t.user_type&&e.bootstrap(o.LoginComponent)})}}});

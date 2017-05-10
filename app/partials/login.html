@@ -1,0 +1,35 @@
+<div class="header header-filter" style=" background-size: cover; background-position: top center;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 text-center">
+        <div class="card card-signup">
+          <form class="form" method="post" action="/login" (ngSubmit)="login($event)">
+            <div class="header header-primary text-center">
+              <h4>Sign in</h4>
+            </div>
+            <h3 class="mt-0">Fun Easy Learn</h3>
+            <div class="content">
+              <div class="form-group">
+                <input type="text" name="username" [(ngModel)]="login_info.username" class="form-control underline-input" placeholder="Enter Your Username">
+              </div>
+              <div class="form-group">
+                <input type="password" name="password" [(ngModel)]="login_info.password" placeholder="Password..." class="form-control underline-input">
+              </div>
+            </div>
+            <div class="footer text-center">
+              <button type="submit" class="btn btn-primary btn-raised">Login<div class="ripple-container"></div></button>
+            </div>
+          </form>
+          <div class="alert alert-danger" [hidden]="error==''"><div class="container-fluid">{{error}}</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="container">
+      <div class="col-lg-12 text-center">
+        <div class="copyright"></div>
+      </div>
+    </div>
+  </footer>
+</div>

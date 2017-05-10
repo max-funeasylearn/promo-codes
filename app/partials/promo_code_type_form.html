@@ -1,0 +1,32 @@
+<div class="bg-light lter b-b wrapper-md mb-10">
+  <div class="row">
+    <div class="col-sm-6 col-xs-12">
+      <h1 class="font-thin h3 m-0" id="promo_code_type_form_title">{{form_title}}</h1>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-3 col-md-4 col-sm-6 boxs">
+    <form  (ngSubmit)="save($event)" id="promo_code_type_form" (display)="onDisplay()" class="boxs-body">
+      <input type="hidden" id="promo_code_type_id" [(ngModel)]="promo_code_type.promo_code_type_id" />
+      <div class="form-group">
+        <label for="project_name">Project Name</label>
+        <input type="text" class="form-control" id="project_name" [(ngModel)]="promo_code_type.project_name" required>
+      </div>
+      <div class="form-group">
+        <label for="title">Promo Code Type Title</label>
+        <input type="text" class="form-control" id="title" [(ngModel)]="promo_code_type.title" required>
+      </div>
+      <div class="form-group">
+        <label for="promo_code_api_title">Promo Code API Title</label>
+        <input type="text" class="form-control" id="promo_code_api_title" [(ngModel)]="promo_code_type.promo_code_api_title" required>
+      </div>
+      <div class="form-group">
+        <label for="comment">Comment</label>
+        <textarea class="form-control" id="comment" [(ngModel)]="promo_code_type.comment"></textarea>
+      </div>
+      <button type="submit" class="btn btn-raised btn-primary">Save</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,23 @@
+{
+  "name": "promo-codes",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "aws-sdk": "*",
+    "body-parser": "*",
+    "cookie-parser": "^1.4.3",
+    "express": "4.8.*",
+    "express-session": "^1.15.2",
+    "jade": "*",
+    "mysql": "^2.13.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "request": "^2.75.0"
+  },
+  "devDependencies": {
+    "gulp-dev-express": "^1.0.1"
+  }
+}
